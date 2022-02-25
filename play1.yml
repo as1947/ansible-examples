@@ -1,0 +1,16 @@
+-
+  name: Play 1
+  hosts: 172.31.84.12
+  tasks:
+    - name: Excute command 'date'
+      command: date
+    - name: Create a dir
+      command: mkdir -p ./ansible-example/temp
+    - name: Create a file
+      command: touch  ./ansible-example/temp/file1
+    - name: Enter text
+      shell: clear; cp /dev/null ./ansible-example/temp/file1; echo "test" >> ./ansible-example/temp/file1; echo "testing" >> ./ansible-example/temp/file1; cat ./ansible-example/temp/file1
+      register: "output"
+
+    - debug: var=output.stdout_lines
+

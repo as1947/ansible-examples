@@ -1,0 +1,14 @@
+- name: checking service status
+  hosts: test
+  tasks:
+  - name: checking service status
+    command: systemctl status "{{ item }}"
+    with_items:
+    - httpd
+    - sshd
+    - postfix
+    register: result
+    ignore_errors: yes
+  - name: showing report
+    debug:
+     var: result

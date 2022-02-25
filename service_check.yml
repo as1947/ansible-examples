@@ -1,0 +1,15 @@
+---
+ - hosts: localhost
+   connection: local 
+ 
+   tasks:
+   - name: get service facts
+     service_facts:
+ 
+   - name: check if TFA is installed
+     fail:
+       msg: Tracefile Analyzer is not installed, why? It should have been there!
+     when: ansible_facts.services["apache2"] is not defined
+   - name: try to work out how to access the service
+     debug:
+       var: ansible_facts.services["apache2"]

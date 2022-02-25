@@ -1,0 +1,14 @@
+---
+- hosts: test
+  become: true
+  tasks:
+    - package:
+       name=httpd state=present update_cache=yes
+
+    - name: ensure apache started
+      service: name=httpd state=started enabled=yes
+    - name: check apache status
+      service: name=httpd state=status enabled=yes
+      register: "output"
+
+    - debug: var=output.stdout_lines

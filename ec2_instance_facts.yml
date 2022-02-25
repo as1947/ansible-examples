@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Check Instances Region must be supplied for tag filter 
+      ec2_instance_info:
+        region: us-east-1
+        filters:
+          "tag:Name": MyTargetEc2Instance
+        # instance_ids: i-01a1e47b2d10bf392      
+      register: ec2_info
+ 
+    - name: displaying output
+      debug: msg="{{item.instance_id}}"
+      with_items: "{{ec2_info.instances}}"
